@@ -124,5 +124,4 @@ $(function(){
 	})
 
 });
-wow = new WOW()
-  wow.init();
+new WOW().init();
