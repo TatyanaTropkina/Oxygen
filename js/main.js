@@ -2,13 +2,13 @@ function testWebP(e){var A=new Image;A.onload=A.onerror=function(){e(2==A.height
 document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
 document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 $(function(){
-	$(document).ready(function(){
-		$('.about__title , .expertise__title , .portfolio__title , .team__title , .pricing__title , .subscription__title').addClass('animate__animated animate__fadeInLeft wow');
-		$('about__title , .expertise__title , .portfolio__title , .team__title , .pricing__title , .subscription__title').attr('data-wow-offset', '200');
+	// $(document).ready(function(){
+	// 	$('.about__title , .expertise__title , .portfolio__title , .team__title , .pricing__title , .subscription__title').addClass('animate__animated animate__fadeInLeft wow');
+	// 	$('about__title , .expertise__title , .portfolio__title , .team__title , .pricing__title , .subscription__title').attr('data-wow-offset', '200');
 		
-		$('.about__content , .expertise__inner , .expertise__cards , .features__content , .portfolio__inner , .team__items , .pricing__cards ').addClass('animate__animated animate__fadeInUp wow');
-		$('.about__content , .expertise__inner , .expertise__cards , .features__content , .portfolio__inner , .team__items , .pricing__cards ').attr('data-wow-offset', '240');
-	});
+	// 	$('.about__content , .expertise__inner , .expertise__cards , .features__content , .portfolio__inner , .team__items , .pricing__cards ').addClass('animate__animated animate__fadeInUp wow');
+	// 	$('.about__content , .expertise__inner , .expertise__cards , .features__content , .portfolio__inner , .team__items , .pricing__cards ').attr('data-wow-offset', '240');
+	// });
 	$(document).ready(function(){
 		if($('body').hasClass('webp'))
 		{
@@ -142,3 +142,5 @@ $(function(){
 });
 new WOW().init();
 
+const element = document.querySelector('.title');
+element.classList.add('animate__animated', 'animate__bounceOutLeft', 'wow');
