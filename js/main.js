@@ -3,7 +3,7 @@ document.body.addEventListener('touchstart', function(e){ e.preventDefault(); })
 document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 $(function(){
 	
-	$(document).ready(function(){
+	// $(document).ready(function(){
 		if($('body').hasClass('webp'))
 		{
 			$(".portfolio__items").children().each(function () {
@@ -13,9 +13,10 @@ $(function(){
 				$(this).html( $(this).html().replace('jpg',"webp") );
 			});	
 		}
-	})
+	// });
 });
 $(function(){
+
 	$(document).ready(function(){
 		$("#header ,  #footer").on("click","a", function (event) {
 			event.preventDefault();
@@ -24,12 +25,22 @@ $(function(){
 			$('body,html').animate({scrollTop: top}, 1500);
 		});
 	});
-	$(document).ready(function () {
-		let preloader = $('.preloader'),
-loader = preloader.find('.preloader__wrapper');
-loader.fadeOut();
- $('.logo__spinner').addClass('loaded');
+$(document).ready(function () {
+	
+if($(window).width() > 769) {
+	let preloader = $('.preloader'),
+	loader = preloader.find('.preloader__wrapper');
+	loader.fadeOut();
+	$('.logo__spinner').addClass('loaded');
+
+} else {
+	$('.preloader__wrapper').removeClass(this);
+	$('.logo__spinner').css('top', '26px');
+	$('.logo__img-circle').css('animation' , 'none')
+}
+
 });
+
 	$(window).scroll(function () {
 		let scrollTop = $(window).scrollTop();
 		if (scrollTop > 500) {
