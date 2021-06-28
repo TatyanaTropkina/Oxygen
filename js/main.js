@@ -3,7 +3,7 @@ document.body.addEventListener('touchstart', function(e){ e.preventDefault(); })
 document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 $(function(){
 	
-	// $(document).ready(function(){
+	$(document).ready(function(){
 		if($('body').hasClass('webp'))
 		{
 			$(".portfolio__items").children().each(function () {
@@ -13,7 +13,7 @@ $(function(){
 				$(this).html( $(this).html().replace('jpg',"webp") );
 			});	
 		}
-	// });
+	});
 });
 $(function(){
 
@@ -27,7 +27,7 @@ $(function(){
 	});
 $(document).ready(function () {
 	
-if($(window).width() > 769) {
+if($(window).width() > 770) {
 	let preloader = $('.preloader'),
 	loader = preloader.find('.preloader__wrapper');
 	loader.fadeOut();
