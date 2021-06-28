@@ -2,18 +2,15 @@ function testWebP(e){var A=new Image;A.onload=A.onerror=function(){e(2==A.height
 document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
 document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 $(function(){
-	// $(document).ready(function(){
-	// 	$('.about__title , .expertise__title , .portfolio__title , .team__title , .pricing__title , .subscription__title').addClass('animate__animated animate__fadeInLeft wow');
-	// 	$('about__title , .expertise__title , .portfolio__title , .team__title , .pricing__title , .subscription__title').attr('data-wow-offset', '200');
-		
-	// 	$('.about__content , .expertise__inner , .expertise__cards , .features__content , .portfolio__inner , .team__items , .pricing__cards ').addClass('animate__animated animate__fadeInUp wow');
-	// 	$('.about__content , .expertise__inner , .expertise__cards , .features__content , .portfolio__inner , .team__items , .pricing__cards ').attr('data-wow-offset', '240');
-	// });
+	
 	$(document).ready(function(){
 		if($('body').hasClass('webp'))
 		{
 			$(".portfolio__items").children().each(function () {
 				$(this).html( $(this).html().replaceAll('jpg',"webp") );
+			});	
+			$(".presentation").children().each(function () {
+				$(this).html( $(this).html().replace('jpg',"webp") );
 			});	
 		}
 	})
@@ -32,7 +29,6 @@ $(function(){
 loader = preloader.find('.preloader__wrapper');
 loader.fadeOut();
  $('.logo__spinner').addClass('loaded');
- preloader.find('.container-fluid').addClass('loaded');
 });
 	$(window).scroll(function () {
 		let scrollTop = $(window).scrollTop();
@@ -111,12 +107,15 @@ $(function(){
 					  return false;
 		}
 	  });
+	
+		$('.about__title , .expertise__title , .portfolio__title , .team__title , .pricing__title , .subscription__title').addClass('animate__animated animate__fadeInLeft wow');
+		$('about__title , .expertise__title , .portfolio__title , .team__title , .pricing__title , .subscription__title').attr('data-wow-offset', '200');
+		
+		$('.about__content , .expertise__inner , .expertise__cards , .features__content , .portfolio__inner , .team__items , .pricing__cards ').addClass('animate__animated animate__fadeInUp wow');
+		$('.about__content , .expertise__inner , .expertise__cards , .features__content , .portfolio__inner , .team__items , .pricing__cards ').attr('data-wow-offset', '240');
+	
 	 
 });
-// const element = document.querySelectorAll('.test');
-// element.classList.add('blyat');
-
-
 
 $(function(){
 
@@ -140,7 +139,9 @@ $(function(){
 		$('.presentation__video-pause').css('opacity', '0');
 	});
 });
-new WOW().init();
 
-const element = document.querySelector('.title');
-element.classList.add('animate__animated', 'animate__bounceOutLeft', 'wow');
+$(function () {
+	$(document).ready(function () {
+		new WOW().init();
+	});
+});
