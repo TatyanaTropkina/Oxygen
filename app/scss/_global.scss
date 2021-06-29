@@ -1,0 +1,113 @@
+html {
+	overflow-x: hidden;
+
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+
+	color: $colorText;
+	@extend %openSans-light;
+	font-size: 14px;
+	line-height: 24px;
+	min-width: 320px;
+	overflow-x: hidden;
+	position: relative;
+}
+
+ul,
+li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+p {
+	padding: 0;
+	margin: 0;
+
+}
+
+figure {
+	margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	padding: 0;
+	margin: 0;
+}
+
+button {
+	outline: none;
+	border: none;
+	cursor: pointer;
+	background-color: transparent;
+
+	&:active,
+	&:focus {
+		outline: none;
+	}
+
+}
+
+.logo__img {
+	width: 42px;
+	height: 42px;
+}
+
+.container {
+	max-width: 1230px;
+	margin: 0 auto;
+	padding: 0 15px;
+
+}
+
+.container-fluid {
+	max-width: 1365px;
+	margin: 0 auto;
+	padding: 0 15px;
+}
+
+.title {
+	@extend %montserrat;
+	color: $colorTitle;
+	font-size: 60px;
+	line-height: 75px;
+	letter-spacing: -1.65px;
+	position: relative;
+	padding-bottom: 18px;
+	display: inline-block;
+
+
+	&::after {
+		@extend %content;
+		width: 60px;
+		height: 4px;
+		background-color: $colorAccent;
+		bottom: 0;
+		left: 0;
+
+	}
+
+	&::before {
+		@extend %content;
+		top: 0;
+		right: -1px;
+		width: 10px;
+		height: 100%;
+		background-color: #fff;
+
+	}
+}
