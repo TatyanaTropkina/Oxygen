@@ -1,20 +1,7 @@
 function testWebP(e){var A=new Image;A.onload=A.onerror=function(){e(2==A.height)},A.src="data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA"}testWebP(function(e){1==e?document.querySelector("body").classList.add("webp"):document.querySelector("body").classList.add("no-webp")});
 document.body.addEventListener('touchstart', function(e){ e.preventDefault(); });
 document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
-$(function(){
-	
-	$(document).ready(function(){
-		if($('body').hasClass('webp'))
-		{
-			$(".portfolio__items").children().each(function () {
-				$(this).html( $(this).html().replaceAll('jpg',"webp") );
-			});	
-			$(".presentation").children().each(function () {
-				$(this).html( $(this).html().replace('jpg',"webp") );
-			});	
-		}
-	});
-});
+
 $(function(){
 
 	$(document).ready(function(){
