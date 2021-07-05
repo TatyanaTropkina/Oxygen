@@ -1,0 +1,40 @@
+$light: #F6F8FA;
+$colorAccent: #FCBB08;
+$colorTitle: #242121;
+$colorText: #373A39;
+
+%content {
+	position: absolute;
+	content: '';
+}
+
+%merriweather {
+	font-family: "Merriweather-LightItalic", serif;
+	font-weight: 300;
+}
+
+%montserrat {
+	font-family: "Montserrat-Bold", serif;
+	font-weight: 700;
+
+}
+
+%openSans-light {
+	font-family: "OpenSans-light", serif;
+	font-weight: 300;
+}
+
+%openSans-regular {
+	font-family: "OpenSans-Regular", serif;
+	font-weight: 400;
+}
+
+%openSans-semiBold {
+	font-family: "OpenSans-Semibold", serif;
+	font-weight: 600;
+}
+
+%raleway {
+	font-family: "Raleway-Bold", serif;
+	font-weight: 700;
+}
