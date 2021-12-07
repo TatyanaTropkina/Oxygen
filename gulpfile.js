@@ -28,130 +28,118 @@ let {
     gulp = require('gulp'),
     browsersync = require('browser-sync').create(),
     fileinclude = require("gulp-file-include"),
-    sass = require('gulp-sass'),
-    uglify = require('gulp-uglify'),
+	sass = require('gulp-sass')(require('sass')),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     del = require('del'),
     autoprefixer = require('gulp-autoprefixer'),
     group_media = require("gulp-group-css-media-queries"),
+	uglify = require('gulp-uglify-es').default,
     imagemin = require("gulp-imagemin"),
     webp = require("gulp-webp"),
     webphtml = require("gulp-webp-html"),
     webpcss = require("gulp-webp-css"),
     clean_css = require("gulp-clean-css"),
     ttf2woff = require("gulp-ttf2woff"),
-    ttf2woff2 = require("gulp-ttf2woff2"),
-    fonter = require("gulp-fonter");
+    ttf2woff2 = require("gulp-ttf2woff2");
 
-function browserSync(params) {
-    browsersync.init({
-        server: {
-            baseDir: "./dist/"
-        },
-        port: 3000,
-    })
-}
+	function watchFiles(params) {
+		gulp.watch(['app/*.html'], html);
+		gulp.watch(['app/scss/*.scss'], scss);
+		gulp.watch(['app/js/*.js'], js);
+		gulp.watch(['app/images/**/*.{jpg,png,svg,gif,ico,webp}'], images);
+		gulp.watch(['app/video/*.*'], video);
+	}
+	
+	
+	function browserSync(params) {
+		browsersync.init({
+			server: {
+				baseDir: "./dist/"
+			},
+			port: 3000,
+		})
+	}
+	function html() {
+		return src(path.src.html)
+			.pipe(fileinclude())
+			.pipe(webphtml())
+			.pipe(dest(path.build.html))
+			.pipe(browsersync.stream())
+	}
 
-function watchFiles(params) {
-    gulp.watch(['app/*.html'], html);
-    gulp.watch(['app/scss/*.scss'], scss);
-    gulp.watch(['app/js/*.js'], js);
-    gulp.watch(['app/images/**/*.{jpg,png,svg,gif,ico,webp}'], images);
-    gulp.watch(['app/video/*.*'], video);
-}
+	function css() {
+		return gulp.src([
+			'node_modules/normalize.css/normalize.css',
+			'node_modules/slick-carousel/slick/slick.css',
+			'node_modules/animate.css/animate.min.css',
+	])
+			.pipe(concat('_libs.scss'))
+			.pipe(dest('app/scss'))
+			.pipe(browsersync.stream())
+	}
+	
+	function scss() {
+		return src(path.src.scss)
+			.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+			.pipe(autoprefixer({
+				overrideBrowserslist: ['last 5 versions']
+			}))
+			.pipe(group_media())
+			.pipe(webpcss())
+			
+			.pipe(clean_css())
+			.pipe(rename({
+				suffix: '.min'
+			}))
+			.pipe(dest(path.build.css))
+			.pipe(browsersync.stream())
+	}	
+	function addScript() {
+		return gulp.src([
+			'node_modules/slick-carousel/slick/slick.js',
+			'node_modules/wow.js/dist/wow.min.js',
+			'node_modules/mixitup/dist/mixitup.js',
+			'app/js/webp.js',
+	])
+			.pipe(concat('libs.min.js'))
+			.pipe(uglify())
+			.pipe(dest('app/js'))
+			.pipe(dest(path.build.js))
+			.pipe(browsersync.stream())
+	}
+	function js() {
+		return src(['app/js/main.js'])
+		.pipe(fileinclude())
+		.pipe(uglify())
+		.pipe(rename({
+			suffix: '.min'
+		}))
+			.pipe(dest(path.build.js))
+			.pipe(browsersync.stream())
+		
+	}
+	function images() {
+		return src(path.src.images)
+			.pipe(webp({
+					quality: 70
+				}))
+			.pipe(dest(path.build.images))
 
-function clean(params) {
-    return del('./dist/');
-}
-
-
-function html() {
-    return src(path.src.html)
-        .pipe(fileinclude())
-        .pipe(webphtml())
-        .pipe(dest(path.build.html))
-        .pipe(browsersync.stream())
-}
-
-function css() {
-    return gulp.src([
-    'node_modules/normalize.css/normalize.css',
-    'node_modules/slick-carousel/slick/slick.css',
-	'node_modules/animate.css/animate.min.css',
-
-  ])
-        .pipe(concat('_libs.scss'))
-        .pipe(dest('app/scss'))
-        .pipe(browsersync.stream())
-}
-
-function scss() {
-    return src(path.src.scss)
-        .pipe(sass({
-            outputStyle: 'compressed'
-        }))
-        .pipe(autoprefixer({
-            overrideBrowserslist: ['last 5 versions']
-        }))
-        .pipe(group_media())
-        .pipe(webpcss())
-        .pipe(clean_css())
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(dest(path.build.css))
-        .pipe(browsersync.stream())
-}
-
-function images() {
-    return src(path.src.images)
-        .pipe(
-            webp({
-                quality: 70
-            }))
-        .pipe(dest(path.build.images))
-        .pipe(src(path.src.images))
-        .pipe(
-            imagemin({
-                progressive: true,
-                svgPlugins: [{
-                    removeViewBox: false
-              }],
-                interLased: true,
-                optimisationLavel: 3
-            }))
-        .pipe(dest(path.build.images))
-        .pipe(browsersync.stream())
-}
-
-function addScript() {
-    return gulp.src([
-    'node_modules/slick-carousel/slick/slick.js',
-	'node_modules/wow.js/dist/wow.min.js',
-	'node_modules/mixitup/dist/mixitup.js',
-	'app/js/webp.js',
-
-  ])
-        .pipe(concat('libs.min.js'))
-        .pipe(uglify())
-        .pipe(dest('app/js'))
-        .pipe(browsersync.stream())
-}
-
-
-function js() {
-    return src(path.src.js)
-        .pipe(dest(path.build.js))
-        .pipe(browsersync.stream());
-}
-
-function video() {
-    return src(path.src.video)
-        .pipe(dest(path.build.video))
-        .pipe(browsersync.stream())
-}
-
+			.pipe(src(path.src.images))
+			.pipe(imagemin([
+					imagemin.gifsicle({interlaced: true}),
+					imagemin.mozjpeg({quality: 75, progressive: true}),
+					imagemin.optipng({optimizationLevel: 3}),
+				]))
+			.pipe(dest(path.build.images))
+			.pipe(browsersync.stream())
+	}
+	function video() {
+		return src(path.src.video)
+			.pipe(dest(path.build.video))
+			.pipe(browsersync.stream())
+	}
 function fonts() {
     src(path.src.fonts)
         .pipe(ttf2woff())
@@ -161,6 +149,7 @@ function fonts() {
         .pipe(ttf2woff2())
         .pipe(dest(path.build.fonts));
 }
+
 gulp.task("otf2ttf", function () {
     return src('app/fonts/**/*.*')
         .pipe(fonter({
@@ -168,6 +157,7 @@ gulp.task("otf2ttf", function () {
         }))
         .pipe(dest('app/fonts'));
 })
+
 function fontsStyle(params) {
 
     let file_content = fs.readFileSync('app/scss/_fonts.scss');
@@ -189,21 +179,24 @@ function fontsStyle(params) {
     }
 }
 
-function cb() {
+	function clean(params) {
+		return del('./dist/');
+	}
+	function cb() {
 
-}
+	}
+	let build = gulp.series(clean, gulp.parallel(js, scss, css, html, images, addScript, video, fonts), fontsStyle);
+	let watch = gulp.parallel(build, watchFiles, browserSync);
 
-let build = gulp.series(clean, gulp.parallel(scss, html, css, js, addScript, images, video, fonts), fontsStyle);
-let watch = gulp.parallel(build, watchFiles, browserSync);
-
+	
 exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
 exports.video = video;
 exports.addScript = addScript;
 exports.js = js;
 exports.images = images;
-exports.scss = scss;
 exports.css = css;
+exports.scss = scss;
 exports.html = html;
 exports.build = build;
 exports.watch = watch;

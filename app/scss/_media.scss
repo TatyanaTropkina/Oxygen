@@ -22,8 +22,7 @@
 	}
 
 	.features__content {
-
-		padding: 70px 30px 100px 60px;
+		padding: 60px 30px 80px 50px;
 	}
 
 	.gallery-slider__content {
@@ -32,15 +31,15 @@
 	}
 
 	.pricing__card-price {
-		font-size: 71px;
-		line-height: 95px;
+		font-size: 62px;
+		line-height: 72px;
 		margin-bottom: 21px;
 	}
 
 	.pricing__card-price sup {
-		font-size: 36px;
 		line-height: 42px;
-		top: -0.8em;
+		font-size: 34px;
+		top: -0.7em;
 	}
 
 	.pricing__list-item {
@@ -60,9 +59,7 @@
 	.subscription {
 		padding: 100px 0 120px;
 	}
-}
 
-@media(max-width: 900px) {
 	.about__inner {
 
 		display: block;
@@ -89,9 +86,6 @@
 
 	}
 
-	.features__content {
-		padding: 60px 30px 80px 50px;
-	}
 
 	.portfolio__top {
 
@@ -154,16 +148,6 @@
 		margin-top: 24px;
 	}
 
-	.pricing__card-price {
-		font-size: 62px;
-		line-height: 72px;
-		margin-bottom: 21px;
-	}
-
-	.pricing__card-price sup {
-		font-size: 34px;
-		top: -.7em;
-	}
 
 	.subscription__map {
 		padding-left: 47px;
@@ -179,7 +163,7 @@
 	}
 }
 
-@media(min-width: 769px) {
+@media(min-width: 768px) {
 	.preloader {
 		position: absolute;
 		top: 0;
@@ -290,15 +274,14 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		bottom: 0;
-		width: 30%;
-		min-width: 230px;
+		min-width: 200px;
+		border-radius: 10px;
 		background-color: #fff;
 		display: block;
 		transform: translateX(500%);
 		transition: all .5s;
 		z-index: 10;
-		padding: 100px 20px 30px;
+		padding: 100px 30px 40px;
 		text-align: right;
 		box-shadow: 0 0 49px 10px rgba($colorText, .3);
 		overflow-y: auto;
@@ -539,6 +522,12 @@
 		font-size: 17px;
 	}
 
+	.pricing__cards {
+		grid-template-columns: minmax(200px, 300px);
+		justify-content: center;
+
+	}
+
 	.pricing__list-item {
 		margin-bottom: 18px;
 	}
@@ -593,14 +582,6 @@
 	}
 }
 
-@media (max-width: 700px) {
-	.pricing__cards {
-		grid-template-columns: minmax(200px, 300px);
-		justify-content: center;
-
-	}
-}
-
 @media(max-width:600px) {
 	.portfolio__buttons {
 		flex-wrap: wrap;
@@ -642,9 +623,7 @@
 	.presentation__list-descr {
 		font-size: 12px;
 	}
-}
 
-@media (max-width: 550px) {
 	.header__title {
 		font-size: 72px;
 		line-height: 69px;
@@ -671,10 +650,6 @@
 
 	.expertise__title {
 		margin-bottom: 60px;
-	}
-
-	.presentation__video-wrapper {
-		margin-bottom: 50px;
 	}
 
 	.team__name {
@@ -722,7 +697,6 @@
 	.subscription__title {
 		margin-bottom: 362px;
 	}
-
 }
 
 @media(max-width: 500px) {
